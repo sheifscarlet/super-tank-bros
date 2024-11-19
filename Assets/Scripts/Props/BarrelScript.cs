@@ -52,8 +52,7 @@ public class BarrelScript : MonoBehaviour
     IEnumerator Explode()
     {
         //yield return new WaitForSeconds(0.25f);
-        //call explosion effect
-        VFXController.instance.PlaySFX(3,transform.position);
+        
         //shake screen
         CameraShake.instance.ShakeCamera(intensity,time);
         
@@ -75,13 +74,12 @@ public class BarrelScript : MonoBehaviour
             }
             else if (collider.CompareTag("Kamikaze"))
             {
-                VFXController.instance.PlaySFX(1,collider.gameObject.transform.position);
+                
                 Destroy(collider.gameObject);
             }
         }
 
         Destroy(gameObject); // Destroy the barrel
-        //destory the effect
         yield return null;
     }
 }

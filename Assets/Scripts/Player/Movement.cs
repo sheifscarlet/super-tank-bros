@@ -1,50 +1,57 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
-{   
+{
+    
     [Header("Movement Properties")]
-    [SerializeField] private float tankSpeed;
-    [SerializeField] private float rotationSpeed;
+    [SerializeField] private float tankSpeed = 5f;
+    [SerializeField] private float rotationSpeed = 100f;
+    [SerializeField] private PlayerType playerType;
     private float _horizontalInput;
     private float _verticalInput;
     
-    //Components
+
+    // Components
     private Rigidbody _rb;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        _horizontalInput = Input.GetAxis("Horizontal");
-        _verticalInput = Input.GetAxis("Vertical");
+        switch (playerType)
+        {
+            case PlayerType.Player1:
+                _horizontalInput = Input.GetAxis("Horizontal");
+                _verticalInput = Input.GetAxis("Vertical");
+                break;
+            case PlayerType.Player2:
+                _horizontalInput = Input.GetAxis("Horizontal2");
+                _verticalInput = Input.GetAxis("Vertical2");
+                break;
+        }
     }
 
     private void FixedUpdate()
     {
-        
         HandleMovement();
     }
 
-
     private void HandleMovement()
     {
-        //Move
-        Vector3 wantedPosition = transform.position + (transform.forward * _verticalInput * tankSpeed * Time.deltaTime);
-        _rb.MovePosition(wantedPosition);
-        
-        //Rotate
-        Quaternion wantedRotation = transform.rotation * Quaternion.Euler(Vector3.up * (rotationSpeed * _horizontalInput * Time.deltaTime));
-        _rb.MoveRotation(wantedRotation);
+        // Move
+        Vector3 movement = transform.forward * _verticalInput * tankSpeed;
+        _rb.MovePosition(_rb.position + movement * Time.fixedDeltaTime);
+
+        // Rotate
+        Quaternion targetRotation = transform.rotation * Quaternion.Euler(Vector3.up * (_horizontalInput * rotationSpeed * Time.fixedDeltaTime));
+        _rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime));
+
+        // Reset unwanted physics forces
+        _rb.velocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
     }
 }

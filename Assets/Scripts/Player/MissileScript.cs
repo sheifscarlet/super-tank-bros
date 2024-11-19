@@ -21,7 +21,7 @@ public class MissileScript : MonoBehaviour
 
     private void OnEnable()
     {
-        // При активации ракеты задаем ей начальную скорость
+        
         if (_rb != null)
         {
             _rb.velocity = transform.forward * speed;
@@ -44,7 +44,6 @@ public class MissileScript : MonoBehaviour
             CameraShake.instance.ShakeCamera(intensity,time);
             Destroy(other.gameObject);
             DestroyMissile();
-            VFXController.instance.PlaySFX(1,transform.position);
         } 
         else if (other.CompareTag("Enemy"))
         {
@@ -52,12 +51,10 @@ public class MissileScript : MonoBehaviour
             EnemyAI enemy = other.GetComponent<EnemyAI>();
             enemy.TakeDamage(damageAmount);
             DestroyMissile();
-            VFXController.instance.PlaySFX(0,transform.position);
         }
         else if(other.CompareTag("Environment"))
         {
             CameraShake.instance.ShakeCamera(1.5f,time);
-            VFXController.instance.PlaySFX(0,transform.position);
             DestroyMissile();
         }
     }

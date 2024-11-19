@@ -29,7 +29,7 @@ public class Health : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         CameraShake.instance.ShakeCamera(intensity,time);
-        VFXController.instance.PlaySFX(0,transform.position);
+        
         if(currentHealth > 0)
         {
             currentHealth -= damageAmount;

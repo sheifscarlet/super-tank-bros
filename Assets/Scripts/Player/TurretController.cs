@@ -1,48 +1,31 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TurretController : MonoBehaviour
 {
-    [SerializeField] private float lagSpeed = 5f;
-    [SerializeField] private Camera camera;
-    [SerializeField] private float rotationLockDuration = 0.2f; // Длительность блокировки поворота дула
+    [SerializeField] private float rotationSpeed = 50f;
+    [SerializeField] private float rotationLockDuration = 0.2f;
 
     private bool isRotationLocked = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (camera == null)
-        {
-            camera = Camera.main;
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!isRotationLocked)
         {
-            HandleTurretRotation();
+            // Turret rotation handled by Shooting script
         }
     }
 
-    private void HandleTurretRotation()
+    // Rotate turret manually using input (-1 for left, 1 for right)
+    public void RotateTurret(float direction)
     {
-        Ray screenRay = camera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(screenRay, out hit))
-        {
-            Vector3 targetPosition = hit.point;
-            Vector3 direction = targetPosition - transform.position;
-            direction.y = 0f; // Ensure the direction is horizontal
+        if (isRotationLocked) return;
 
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * lagSpeed);
-        }
+        float rotationAmount = direction * rotationSpeed * Time.deltaTime;
+        transform.Rotate(0f, rotationAmount, 0f);
     }
 
+    // Lock turret rotation temporarily
     public void LockRotation()
     {
         isRotationLocked = true;
