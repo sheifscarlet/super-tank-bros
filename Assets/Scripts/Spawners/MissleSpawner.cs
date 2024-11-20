@@ -18,6 +18,9 @@ public class MissleSpawner : MonoBehaviour, ISpawner
             missile.transform.position = shootPoint.position;
             missile.transform.rotation = shootPoint.rotation;
             missile.SetActive(true);
+            
+            // Scoring
+            missile.GetComponent<MissileScript>().SetShotBy(gameObject);
         }
     }
 }

@@ -9969,6 +9969,7 @@ GameObject:
   - component: {fileID: 1095647989}
   - component: {fileID: 1095647988}
   - component: {fileID: 1095647994}
+  - component: {fileID: 1095647995}
   m_Layer: 3
   m_Name: P2Tank
   m_TagString: Player
@@ -10107,6 +10108,19 @@ MonoBehaviour:
   currentHealth: 0
   intensity: 5
   time: 0.25
+--- !u!114 &1095647995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095647987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab6ebe1a63d45749b594987a4fc3052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _score: 0
 --- !u!1001 &1096570647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19489,6 +19503,7 @@ GameObject:
   - component: {fileID: 1827409472157941719}
   - component: {fileID: 1827409472157941720}
   - component: {fileID: 1827409472157941721}
+  - component: {fileID: 1827409472157941722}
   m_Layer: 3
   m_Name: P1Tank
   m_TagString: Player
@@ -19608,6 +19623,19 @@ MonoBehaviour:
   currentHealth: 0
   intensity: 5
   time: 0.25
+--- !u!114 &1827409472157941722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827409472157941715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab6ebe1a63d45749b594987a4fc3052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _score: 0
 --- !u!4 &1854369138566686084
 Transform:
   m_ObjectHideFlags: 0
