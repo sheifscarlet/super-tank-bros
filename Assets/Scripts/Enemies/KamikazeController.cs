@@ -4,10 +4,7 @@ using UnityEngine.AI;
 
 public class KamikazeController : MonoBehaviour
 {
-    [Header("Movement")]
-    [SerializeField] private float minSpeed = 2;
-    [SerializeField] private float maxSpeed = 4;
-    private float moveSpeed;
+    
 
     [Header("Players")]
     [SerializeField] private GameObject player1; 
@@ -27,8 +24,7 @@ public class KamikazeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moveSpeed = Random.Range(minSpeed, maxSpeed);
-        _agent.speed = moveSpeed;
+        
     }
 
     // Update is called once per frame
@@ -43,16 +39,31 @@ public class KamikazeController : MonoBehaviour
 
     private void ChooseClosestPlayer()
     {
-        if (player1 == null || player2 == null)
+        // Handle case where both players are null or inactive
+        if ((player1 == null || !player1.activeSelf) && (player2 == null || !player2.activeSelf))
         {
-            Debug.LogWarning("One or both players are not assigned!");
+            targetPlayer = null; 
             return;
         }
 
+        // Handle case where only one player is active
+        if (player1 != null && player1.activeSelf && (player2 == null || !player2.activeSelf))
+        {
+            targetPlayer = player1;
+            return;
+        }
+
+        if (player2 != null && player2.activeSelf && (player1 == null || !player1.activeSelf))
+        {
+            targetPlayer = player2;
+            return;
+        }
+
+        
         float distanceToPlayer1 = Vector3.Distance(transform.position, player1.transform.position);
         float distanceToPlayer2 = Vector3.Distance(transform.position, player2.transform.position);
 
-        // Set the closer player as the target
+        
         targetPlayer = distanceToPlayer1 < distanceToPlayer2 ? player1 : player2;
     }
 

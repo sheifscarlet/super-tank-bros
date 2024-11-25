@@ -1029,9 +1029,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6610774389298334684}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.8, y: -0.01, z: -7.3}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_LocalScale: {x: 2.4999998, y: 2.5, z: 2.4999998}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3008393185849316471}
@@ -1102,12 +1102,12 @@ MonoBehaviour:
   maxHealth: 5
   currentHealth: 0
   walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 5
+  walkPointRange: 10
   turretObj: {fileID: 1748394470297215132}
   timeBetweenAttacks: 1.5
   missileSpeed: 10
   projectile: {fileID: 5836935735594356060, guid: 83b7914f0c45ba34d8b54ab8ce2f05b1, type: 3}
-  sightRange: 14
+  sightRange: 15
   attackRange: 10
   player1: {fileID: 0}
   player2: {fileID: 0}
@@ -1126,8 +1126,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 6610774389298334684}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
-  m_Speed: 2
+  m_Radius: 1.25
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

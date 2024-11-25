@@ -7,6 +7,7 @@ public class MissileScript : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] int damageAmount;
+    [SerializeField] private float selfDestructTime = 2.5f;
     
     [Header("Camera Shake")] 
     [SerializeField] private float intensity = 5f;
@@ -27,6 +28,12 @@ public class MissileScript : MonoBehaviour
             _rb.velocity = transform.forward * speed;
             
         }
+        Invoke(nameof(DestroyMissile), selfDestructTime);
+    }
+    private void OnDisable()
+    {
+        
+        CancelInvoke(nameof(DestroyMissile));
     }
 
     public void DestroyMissile()
