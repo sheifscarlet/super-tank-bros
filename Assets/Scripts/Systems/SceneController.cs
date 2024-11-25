@@ -22,4 +22,10 @@ public class SceneController : MonoBehaviour
         
         SceneManager.LoadScene(sceneName);
     }
+
+    public void ReloadCurrentScene()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+    }
 }
