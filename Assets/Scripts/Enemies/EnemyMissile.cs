@@ -1,10 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMissile : MonoBehaviour
 {
-    public void DestroyMissile()
+    [SerializeField] private float selfDestructTime = 2.5f;
+
+
+    private void OnEnable()
+    {
+        Invoke(nameof(DestroyEnemyMissile), selfDestructTime);
+    }
+    private void OnDisable()
+    {
+        CancelInvoke(nameof(DestroyEnemyMissile));
+    }
+
+    public void DestroyEnemyMissile()
     {
         gameObject.SetActive(false);
     }
@@ -12,11 +25,11 @@ public class EnemyMissile : MonoBehaviour
     {
         if(other.CompareTag("Environment"))
         {
-            DestroyMissile();
+            DestroyEnemyMissile();
         }
         else if(other.CompareTag("Player"))
         {
-            DestroyMissile();
+            DestroyEnemyMissile();
         }
     }
 }
