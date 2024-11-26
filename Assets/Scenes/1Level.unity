@@ -25599,6 +25599,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scout
       objectReference: {fileID: 0}
+    - target: {fileID: 6610774389298334684, guid: 4622c174add851546a5edc73718510c8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7521261335445890292, guid: 4622c174add851546a5edc73718510c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5

@@ -6,6 +6,7 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject mainMenuCanvas;
     public GameObject selectGameTypeCanvas;
+    public GameObject tutorialCanvas;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +23,21 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuCanvas.SetActive(true);
         selectGameTypeCanvas.SetActive(false);
-        
+        tutorialCanvas.SetActive(false);
     }
     public void ShowSelectGameTypeMenu()
     {
         selectGameTypeCanvas.SetActive(true);
         mainMenuCanvas.SetActive(false);
+        tutorialCanvas.SetActive(false);
+        
+    }
+    
+    public void ShowTutorialMenu()
+    {
+        selectGameTypeCanvas.SetActive(false);
+        mainMenuCanvas.SetActive(false);
+        tutorialCanvas.SetActive(true);
         
     }
     
