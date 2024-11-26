@@ -148,5 +148,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   damageAmount: 1
+  selfDestructTime: 8
   intensity: 5
   time: 0.25
