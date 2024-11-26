@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8948766832598626832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4838671037502789300}
+  - component: {fileID: 7519925177646669106}
+  m_Layer: 0
+  m_Name: Audio Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4838671037502789300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8948766832598626832}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7519925177646669106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8948766832598626832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 227e0429582c2ea4aa93d899f87ce919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundClips:
+  - {fileID: 11400000, guid: 450fd0e97187e7049a9d2b0ffd76f765, type: 2}
+  - {fileID: 11400000, guid: 62111c39bae1d8a439492be471945500, type: 2}
+  - {fileID: 11400000, guid: 7afedb97c1b2ac64a9f98a209911c1ef, type: 2}
+  - {fileID: 11400000, guid: 1e148b85de27e2342871553cbd6e6e20, type: 2}
+  - {fileID: 11400000, guid: ee80a866e3515d9418a819e5ed39b44f, type: 2}
+  - {fileID: 11400000, guid: 087441f6c41f3d64fb8d684e39b3cf82, type: 2}
+  - {fileID: 11400000, guid: 7733d18044918404ea8d357b94916121, type: 2}
+  - {fileID: 11400000, guid: a8a3085749ac4ef40a0bc84b5508c0db, type: 2}
+  ost: {fileID: 0}
+  isSFXTurnedOn: 0
+  isMusicTurnedOn: 0

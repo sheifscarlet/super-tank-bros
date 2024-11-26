@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d3261e782ff834885b76aaecf155c7, type: 3}
   m_Name: Explosion
   m_EditorClassIdentifier: 
-  clipName: 
-  clip: {fileID: 0}
+  clipName: Explosion
+  clip: {fileID: 8300000, guid: a24571365f8c4464cb8739b170d264ba, type: 3}
   volume: 1
