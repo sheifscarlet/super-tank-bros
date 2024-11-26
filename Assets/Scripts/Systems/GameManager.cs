@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool isPaused;
     private bool isGameOver; 
     
+    [Header("Game Mode Settings")]
+    [SerializeField] GameObject secondPlayerUI;
+    [SerializeField] private GameObject secondPlayer;
     
     private void Awake()
     {
@@ -20,6 +23,18 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         isGameOver = false; 
+        if (GameSettings.IsTwoPlayerMode)
+        {
+            Debug.Log("Two Player Mode Enabled");
+            secondPlayerUI.SetActive(true);
+            secondPlayer.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Single Player Mode Enabled");
+            secondPlayerUI.SetActive(false);
+            secondPlayer.SetActive(false);
+        }
     }
 
     // Update is called once per frame

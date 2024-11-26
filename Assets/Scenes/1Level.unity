@@ -20313,6 +20313,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPaused: 0
+  secondPlayerUI: {fileID: 247291110}
+  secondPlayer: {fileID: 1095647987}
 --- !u!1001 &1776405856
 PrefabInstance:
   m_ObjectHideFlags: 0
