@@ -7630,6 +7630,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 692640882}
+  - component: {fileID: 692640883}
   m_Layer: 0
   m_Name: Audio Controller
   m_TagString: Untagged
@@ -7652,6 +7653,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 339788085}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &692640883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692640881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 227e0429582c2ea4aa93d899f87ce919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundClips:
+  - {fileID: 11400000, guid: 450fd0e97187e7049a9d2b0ffd76f765, type: 2}
+  - {fileID: 11400000, guid: 62111c39bae1d8a439492be471945500, type: 2}
+  - {fileID: 11400000, guid: 7afedb97c1b2ac64a9f98a209911c1ef, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  ost: {fileID: 0}
+  isSFXTurnedOn: 0
+  isMusicTurnedOn: 0
 --- !u!1 &692897076
 GameObject:
   m_ObjectHideFlags: 0
