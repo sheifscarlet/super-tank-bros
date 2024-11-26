@@ -10690,6 +10690,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPaused: 0
+  secondPlayerUI: {fileID: 247291110}
+  secondPlayer: {fileID: 1095647987}
 --- !u!1 &1797584532
 GameObject:
   m_ObjectHideFlags: 0
