@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,7 +10,8 @@ public class Shooting : MonoBehaviour
     [Header("Shooting")]
     [SerializeField] private bool canShoot = true;
     [SerializeField] private float cooldown;
-    [SerializeField] private int missileDamage = 10; 
+    [SerializeField] private int baseMissileDamage = 1; 
+    [SerializeField] int missileDamage;
 
     [Header("Camera Shake")]
     [SerializeField] private float intensity = 5f;
@@ -18,6 +20,14 @@ public class Shooting : MonoBehaviour
     [Header("Components")]
     [SerializeField] private MissleSpawner missleSpawner;
     [SerializeField] private TurretController turretController;
+    
+    private Coroutine doubleDamageCoroutine;
+
+
+    private void Start()
+    {
+        missileDamage = baseMissileDamage;
+    }
 
     private void Update()
     {
@@ -99,5 +109,25 @@ public class Shooting : MonoBehaviour
         yield return new WaitForSeconds(cooldown);
         canShoot = true;
         Debug.Log("Ready to shoot");
+    }
+
+    public void ActivateDoubleDamage(float duration)
+    {
+        if (doubleDamageCoroutine != null)
+        {
+            StopCoroutine(doubleDamageCoroutine); 
+        }
+
+        doubleDamageCoroutine = StartCoroutine(DoubleDamageRoutine(duration));
+    }
+    
+    private IEnumerator DoubleDamageRoutine(float duration)
+    {
+        missileDamage = baseMissileDamage * 2; 
+        
+        yield return new WaitForSeconds(duration);
+
+        missileDamage = baseMissileDamage; 
+        doubleDamageCoroutine = null;
     }
 }

@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class DoubleDamagePickUp : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float duration = 5f; 
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            Shooting shooting = other.GetComponent<Shooting>();
+            if (shooting != null)
+            {
+                shooting.ActivateDoubleDamage(duration); 
+            }
+
+            
+            AudioController.instance.PlaySound("PickUp");
+            Destroy(gameObject);
+        }
     }
 }

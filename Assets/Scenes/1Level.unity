@@ -12626,7 +12626,8 @@ MonoBehaviour:
   playerType: 1
   canShoot: 1
   cooldown: 1.5
-  missileDamage: 10
+  baseMissileDamage: 1
+  missileDamage: 1
   intensity: 5
   time: 0.25
   missleSpawner: {fileID: 1095647988}
@@ -25446,6 +25447,7 @@ MonoBehaviour:
   playerType: 0
   canShoot: 1
   cooldown: 1.5
+  baseMissileDamage: 1
   missileDamage: 1
   intensity: 5
   time: 0.25
@@ -25888,6 +25890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c9ef2d7c9736be40b6208f0cb1ade79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 5
 --- !u!33 &4769969550178176127
 MeshFilter:
   m_ObjectHideFlags: 0
