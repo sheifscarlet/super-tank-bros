@@ -42,11 +42,17 @@ public class MissileScript : MonoBehaviour
     public void DestroyMissile()
     {
         gameObject.SetActive(false);
+        _shotBy = null;
     }
     
     public void SetShotBy(GameObject shotBy)
     {
         _shotBy = shotBy;
+    }
+
+    public GameObject GetShotBy()
+    {
+        return _shotBy;
     }
 
     private void Score(int points)

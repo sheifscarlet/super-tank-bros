@@ -35,8 +35,12 @@ public class BarrelScript : MonoBehaviour
     {
         if (other.CompareTag("Missile"))
         {
-            other.gameObject.SetActive(false);
-            StartCoroutine(Explode());
+            // other.gameObject.SetActive(false);
+            MissileScript missile = other.GetComponent<MissileScript>();
+            GameObject shotBy = missile.GetShotBy();
+            missile.DestroyMissile();
+            Score score = shotBy?.GetComponent<Score>();
+            StartCoroutine(Explode(score));
         }
     }
 
@@ -44,12 +48,16 @@ public class BarrelScript : MonoBehaviour
     {
         if (other.collider.CompareTag("Missile"))
         {
-            other.gameObject.SetActive(false);
-            StartCoroutine(Explode());
+            // other.gameObject.SetActive(false);
+            MissileScript missile = other.collider.GetComponent<MissileScript>();
+            GameObject shotBy = missile.GetShotBy();
+            missile.DestroyMissile();
+            Score score = shotBy?.GetComponent<Score>();
+            StartCoroutine(Explode(score));
         }
     }
 
-    IEnumerator Explode()
+    IEnumerator Explode(Score shotBy = null)
     {
         CameraShake.instance.ShakeCamera(intensity,time);
         AudioController.instance.PlaySound("Explosion");
@@ -67,11 +75,12 @@ public class BarrelScript : MonoBehaviour
             else if (collider.CompareTag("Enemy"))
             {
                 collider.GetComponent<EnemyAI>().TakeDamage(explosionDamage);
+                shotBy?.AddScore(50);
             }
             else if (collider.CompareTag("Kamikaze"))
             {
-                
                 Destroy(collider.gameObject);
+                shotBy?.AddScore(100);
             }
         }
 
