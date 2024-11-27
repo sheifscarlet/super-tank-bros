@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
 
     void Win()
     {
+        AudioController.instance.PlaySound("Win");
         isGameOver = true; 
         isPaused = false; 
         Cursor.lockState = CursorLockMode.Confined; 
@@ -82,6 +83,7 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
+        AudioController.instance.PlaySound("GameOver");
         isGameOver = true; 
         isPaused = false; 
         Cursor.lockState = CursorLockMode.Confined; 
