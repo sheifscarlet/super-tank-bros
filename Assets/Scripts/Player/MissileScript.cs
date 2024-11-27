@@ -72,15 +72,14 @@ public class MissileScript : MonoBehaviour
         {
             CameraShake.instance.ShakeCamera(intensity, time);
             Destroy(other.gameObject);
-            DestroyMissile();
             Score(100);
+            DestroyMissile();
         } 
         else if (other.CompareTag("Enemy"))
         {
             CameraShake.instance.ShakeCamera(intensity, time);
             EnemyAI enemy = other.GetComponent<EnemyAI>();
             enemy.TakeDamage(damageAmount);
-            DestroyMissile();
             if (enemy.GetCurrentHealth() <= 0)
             {
                 Score(100);
@@ -89,6 +88,7 @@ public class MissileScript : MonoBehaviour
             {
                 Score(10);
             }
+            DestroyMissile();
         }
         else if (other.CompareTag("Environment"))
         {

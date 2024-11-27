@@ -40,6 +40,7 @@ public class BarrelScript : MonoBehaviour
             GameObject shotBy = missile.GetShotBy();
             missile.DestroyMissile();
             Score score = shotBy?.GetComponent<Score>();
+            score?.AddScore(10);
             StartCoroutine(Explode(score));
         }
     }
@@ -53,6 +54,7 @@ public class BarrelScript : MonoBehaviour
             GameObject shotBy = missile.GetShotBy();
             missile.DestroyMissile();
             Score score = shotBy?.GetComponent<Score>();
+            score?.AddScore(10);
             StartCoroutine(Explode(score));
         }
     }
@@ -75,7 +77,7 @@ public class BarrelScript : MonoBehaviour
             else if (collider.CompareTag("Enemy"))
             {
                 collider.GetComponent<EnemyAI>().TakeDamage(explosionDamage);
-                shotBy?.AddScore(50);
+                shotBy?.AddScore(100);
             }
             else if (collider.CompareTag("Kamikaze"))
             {
