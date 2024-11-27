@@ -14,6 +14,9 @@ public class Health : MonoBehaviour
     
     private bool isDead = false;
     public bool IsDead => isDead;
+
+    [SerializeField] bool canTakeDamage = true;
+    private Coroutine shieldCoroutine;
     
     [Header("Camera Shake")] 
     [SerializeField] private float intensity = 5f;
@@ -36,17 +39,21 @@ public class Health : MonoBehaviour
     
     public void TakeDamage(int damageAmount)
     {
-        CameraShake.instance.ShakeCamera(intensity,time);
+        if (canTakeDamage)
+        {
+            CameraShake.instance.ShakeCamera(intensity,time);
         
-        if(currentHealth > 0)
-        {
-            currentHealth -= damageAmount;
-            OnHealthChanged?.Invoke(currentHealth, maxHealth);
+            if(currentHealth > 0)
+            {
+                currentHealth -= damageAmount;
+                OnHealthChanged?.Invoke(currentHealth, maxHealth);
+            }
+            if(currentHealth <= 0)
+            {
+                Dead();
+            }
         }
-        if(currentHealth <= 0)
-        {
-            Dead();
-        }
+         
     }
 
     public void ResetHealth()
@@ -60,6 +67,28 @@ public class Health : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         gameObject.SetActive(false);
     }
+
+    public void ActivateShield(float duration)
+    {
+        if (shieldCoroutine != null)
+        {
+            StopCoroutine(shieldCoroutine); // Stop the current coroutine to reset the timer
+        }
+
+        shieldCoroutine = StartCoroutine(ShieldRoutine(duration));
+    }
+
+    private IEnumerator ShieldRoutine(float duration)
+    {
+        canTakeDamage = false; 
+        //add visual later
+
+        yield return new WaitForSeconds(duration); 
+
+        canTakeDamage = true; 
+        shieldCoroutine = null; // Reset the coroutine reference
+    }
+    
 
     private void OnTriggerEnter(Collider other)
     {

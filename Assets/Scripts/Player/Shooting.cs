@@ -9,6 +9,7 @@ public class Shooting : MonoBehaviour
     [Header("Shooting")]
     [SerializeField] private bool canShoot = true;
     [SerializeField] private float cooldown;
+    [SerializeField] private int missileDamage = 10; 
 
     [Header("Camera Shake")]
     [SerializeField] private float intensity = 5f;
@@ -39,7 +40,6 @@ public class Shooting : MonoBehaviour
 
     private void HandlePlayer1Inputs()
     {
-        // Rotate turret
         if (Input.GetKey(KeyCode.Q))
         {
             turretController.RotateTurret(-1); // Rotate left
@@ -49,7 +49,6 @@ public class Shooting : MonoBehaviour
             turretController.RotateTurret(1); // Rotate right
         }
 
-        // Shoot
         if (Input.GetKeyDown(KeyCode.Space) && canShoot)
         {
             Shoot();
@@ -58,7 +57,6 @@ public class Shooting : MonoBehaviour
 
     private void HandlePlayer2Inputs()
     {
-        // Rotate turret
         if (Input.GetKey(KeyCode.U))
         {
             turretController.RotateTurret(-1); // Rotate left
@@ -68,7 +66,6 @@ public class Shooting : MonoBehaviour
             turretController.RotateTurret(1); // Rotate right
         }
 
-        // Shoot
         if (Input.GetKeyDown(KeyCode.Return) && canShoot)
         {
             Shoot();
@@ -80,15 +77,14 @@ public class Shooting : MonoBehaviour
         // Camera shake effect
         CameraShake.instance.ShakeCamera(intensity, time);
 
-        // Spawn missile
+        // Spawn missile and set damage
         if (missleSpawner != null)
         {
-            missleSpawner.Spawn();
+            missleSpawner.Spawn(missileDamage);
         }
 
         Debug.Log("Shoot");
 
-        // Temporarily lock turret rotation
         if (turretController != null)
         {
             turretController.LockRotation();
