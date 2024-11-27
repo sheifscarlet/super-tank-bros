@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
         isPaused = false; 
         Cursor.lockState = CursorLockMode.Confined; 
         Time.timeScale = 0f;
-        //UIController.instance.ShowWinScreen();
+        UIController.instance.ShowWinScreen();
     }
 
     void GameOver()
@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         isPaused = false; 
         Cursor.lockState = CursorLockMode.Confined; 
         Time.timeScale = 0f;
-        //UIController.instance.ShowGameOverScreen();
+        UIController.instance.ShowGameOverScreen();
     }
 
     public bool Unpause()
