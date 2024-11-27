@@ -18,13 +18,15 @@ public class MissleSpawner : MonoBehaviour
             missile.transform.position = shootPoint.position;
             missile.transform.rotation = shootPoint.rotation;
             missile.SetActive(true);
-
             
             MissileScript missileScript = missile.GetComponent<MissileScript>();
             if (missileScript != null)
             {
                 missileScript.SetDamage(damage);
             }
+            
+            // Scoring
+            missile.GetComponent<MissileScript>().SetShotBy(gameObject);
         }
         return missile;
     }

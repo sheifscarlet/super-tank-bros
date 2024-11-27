@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 public class MissileScript : MonoBehaviour
@@ -12,7 +13,11 @@ public class MissileScript : MonoBehaviour
     [Header("Camera Shake")] 
     [SerializeField] private float intensity = 5f;
     [SerializeField] private float time = 0.25f;
-
+    
+    // Scoring
+    private GameObject _shotBy;
+    
+    // Components
     private Rigidbody _rb;
 
     private void Awake()
@@ -37,8 +42,25 @@ public class MissileScript : MonoBehaviour
     public void DestroyMissile()
     {
         gameObject.SetActive(false);
+        _shotBy = null;
+    }
+    
+    public void SetShotBy(GameObject shotBy)
+    {
+        _shotBy = shotBy;
     }
 
+    public GameObject GetShotBy()
+    {
+        return _shotBy;
+    }
+
+    private void Score(int points)
+    {
+        Score score = _shotBy.GetComponent<Score>();
+        score.AddScore(points);
+    }
+    
     public void SetDamage(int damage)
     {
         damageAmount = damage;
@@ -50,6 +72,7 @@ public class MissileScript : MonoBehaviour
         {
             CameraShake.instance.ShakeCamera(intensity, time);
             Destroy(other.gameObject);
+            Score(100);
             DestroyMissile();
         } 
         else if (other.CompareTag("Enemy"))
@@ -57,6 +80,14 @@ public class MissileScript : MonoBehaviour
             CameraShake.instance.ShakeCamera(intensity, time);
             EnemyAI enemy = other.GetComponent<EnemyAI>();
             enemy.TakeDamage(damageAmount);
+            if (enemy.GetCurrentHealth() <= 0)
+            {
+                Score(100);
+            }
+            else
+            {
+                Score(10);
+            }
             DestroyMissile();
         }
         else if (other.CompareTag("Environment"))

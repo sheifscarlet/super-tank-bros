@@ -175,6 +175,11 @@ public class EnemyAI : MonoBehaviour
     {
         currentHealth = maxHealth;
     }
+    
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
+    }
 
     public void Dead()
     {
