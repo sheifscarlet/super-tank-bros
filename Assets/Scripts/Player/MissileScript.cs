@@ -7,8 +7,7 @@ using UnityEngine;
 public class MissileScript : MonoBehaviour
 {
     [SerializeField] private float speed;
-    private int damageAmount; 
-    [SerializeField] private float selfDestructTime = 2.5f;
+    [SerializeField] int damageAmount;
     
     [Header("Camera Shake")] 
     [SerializeField] private float intensity = 5f;
@@ -27,22 +26,19 @@ public class MissileScript : MonoBehaviour
 
     private void OnEnable()
     {
+        
         if (_rb != null)
         {
             _rb.velocity = transform.forward * speed;
+            
         }
-        Invoke(nameof(DestroyMissile), selfDestructTime);
-    }
-
-    private void OnDisable()
-    {
-        CancelInvoke(nameof(DestroyMissile));
     }
 
     public void DestroyMissile()
     {
         gameObject.SetActive(false);
     }
+    
     
     public void SetShotBy(GameObject shotBy)
     {
@@ -55,23 +51,19 @@ public class MissileScript : MonoBehaviour
         score.AddScore(points);
     }
     
-    public void SetDamage(int damage)
-    {
-        damageAmount = damage;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.CompareTag("Kamikaze"))
         {
-            CameraShake.instance.ShakeCamera(intensity, time);
+            CameraShake.instance.ShakeCamera(intensity,time);
             Destroy(other.gameObject);
             DestroyMissile();
             Score(100);
         } 
         else if (other.CompareTag("Enemy"))
         {
-            CameraShake.instance.ShakeCamera(intensity, time);
+            CameraShake.instance.ShakeCamera(intensity,time);
             EnemyAI enemy = other.GetComponent<EnemyAI>();
             enemy.TakeDamage(damageAmount);
             DestroyMissile();
@@ -84,9 +76,9 @@ public class MissileScript : MonoBehaviour
                 Score(10);
             }
         }
-        else if (other.CompareTag("Environment"))
+        else if(other.CompareTag("Environment"))
         {
-            CameraShake.instance.ShakeCamera(1.5f, time);
+            CameraShake.instance.ShakeCamera(1.5f,time);
             DestroyMissile();
         }
     }

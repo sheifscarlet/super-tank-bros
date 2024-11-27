@@ -51,8 +51,10 @@ public class BarrelScript : MonoBehaviour
 
     IEnumerator Explode()
     {
+        //yield return new WaitForSeconds(0.25f);
+        
+        //shake screen
         CameraShake.instance.ShakeCamera(intensity,time);
-        AudioController.instance.PlaySound("Explosion");
         
         // Get all colliders within the explosion radius
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
@@ -61,11 +63,13 @@ public class BarrelScript : MonoBehaviour
         {
             if (collider.CompareTag("Player"))
             {
+                // Assuming the player has a method to take damage
                 collider.GetComponent<Health>().TakeDamage(explosionDamage);
                 
             }
             else if (collider.CompareTag("Enemy"))
             {
+                // Assuming the enemy has a method to take damage
                 collider.GetComponent<EnemyAI>().TakeDamage(explosionDamage);
             }
             else if (collider.CompareTag("Kamikaze"))
@@ -75,7 +79,7 @@ public class BarrelScript : MonoBehaviour
             }
         }
 
-        Destroy(gameObject); 
+        Destroy(gameObject); // Destroy the barrel
         yield return null;
     }
 }

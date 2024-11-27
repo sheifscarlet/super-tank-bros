@@ -25,7 +25,7 @@ public class TurretController : MonoBehaviour
         transform.Rotate(0f, rotationAmount, 0f);
     }
 
-    
+    // Lock turret rotation temporarily
     public void LockRotation()
     {
         isRotationLocked = true;
