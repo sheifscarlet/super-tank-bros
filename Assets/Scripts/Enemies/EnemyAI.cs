@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour, IDamagable
+public class EnemyAI : MonoBehaviour
 {
     [Header("Health")]
     [SerializeField] private int maxHealth;
@@ -52,7 +52,6 @@ public class EnemyAI : MonoBehaviour, IDamagable
 
         if (targetPlayer != null)
         {
-            
             playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
             playerInAttackRange = Vector3.Distance(transform.position, targetPlayer.position) <= attackRange;
 
@@ -75,14 +74,12 @@ public class EnemyAI : MonoBehaviour, IDamagable
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
-        
         if (distanceToWalkPoint.magnitude < 1f)
             walkPointSet = false;
     }
 
     private void SearchWalkPoint()
     {
-        
         float randomZ = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
         float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
 
@@ -102,14 +99,13 @@ public class EnemyAI : MonoBehaviour, IDamagable
 
     private void AttackPlayer()
     {
-        
         agent.SetDestination(transform.position);
 
         RotateTurretTowardsPlayer();
 
         if (!alreadyAttacked)
         {
-            
+            AudioController.instance.PlaySound("Shoot");
             Rigidbody rb = Instantiate(projectile, turretObj.transform.position, Quaternion.identity).GetComponent<Rigidbody>();
             rb.AddForce(turretObj.transform.forward * missileSpeed, ForceMode.Impulse);
 
@@ -135,45 +131,38 @@ public class EnemyAI : MonoBehaviour, IDamagable
 
     private void ChooseClosestPlayer()
     {
-        if (player1 == null || player2 == null)
+        // Handle case where both players are null or inactive
+        if ((player1 == null || !player1.gameObject.activeSelf) && (player2 == null || !player2.gameObject.activeSelf))
         {
-            Debug.LogWarning("One or both players are not assigned!");
+            targetPlayer = null; 
             return;
         }
 
+        // Handle case where only one player is active
+        if (player1 != null && player1.gameObject.activeSelf && (player2 == null || !player2.gameObject.activeSelf))
+        {
+            targetPlayer = player1;
+            return;
+        }
+        if (player2 != null && player2.gameObject.activeSelf && (player1 == null || !player1.gameObject.activeSelf))
+        {
+            targetPlayer = player2;
+            return;
+        }
+
+        // Handle case where both players are active
         float distanceToPlayer1 = Vector3.Distance(transform.position, player1.position);
         float distanceToPlayer2 = Vector3.Distance(transform.position, player2.position);
 
         
-        bool player1InSight = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer) &&
-                              Vector3.Distance(transform.position, player1.position) <= sightRange;
-
-        bool player2InSight = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer) &&
-                              Vector3.Distance(transform.position, player2.position) <= sightRange;
-
-       
-        if (player1InSight && player2InSight)
-        {
-            targetPlayer = distanceToPlayer1 < distanceToPlayer2 ? player1 : player2;
-        }
-        else if (player1InSight)
-        {
-            targetPlayer = player1;
-        }
-        else if (player2InSight)
-        {
-            targetPlayer = player2;
-        }
-        else
-        {
-            targetPlayer = null; 
-        }
+        targetPlayer = distanceToPlayer1 < distanceToPlayer2 ? player1 : player2;
     }
 
     public void TakeDamage(int damageAmount)
     {
         if (currentHealth > 0)
         {
+            AudioController.instance.PlaySound("Damage");
             currentHealth -= damageAmount;
         }
         if (currentHealth <= 0)
@@ -194,7 +183,7 @@ public class EnemyAI : MonoBehaviour, IDamagable
 
     public void Dead()
     {
-        
+        AudioController.instance.PlaySound("Death");
         gameObject.SetActive(false);
     }
 
