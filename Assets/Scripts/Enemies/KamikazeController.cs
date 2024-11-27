@@ -72,6 +72,8 @@ public class KamikazeController : MonoBehaviour
         if (other.collider.CompareTag("Player"))
         {
             CameraShake.instance.ShakeCamera(10f, 0.25f);
+            AudioController.instance.PlaySound("Explosion");
+            AudioController.instance.PlaySound("Death");
             gameObject.SetActive(false);
         }
     }

@@ -86,6 +86,8 @@ public class Shooting : MonoBehaviour
     {
         // Camera shake effect
         CameraShake.instance.ShakeCamera(intensity, time);
+        
+        AudioController.instance.PlaySound("Shoot");
 
         // Spawn missile and set damage
         if (missleSpawner != null)

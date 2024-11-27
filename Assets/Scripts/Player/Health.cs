@@ -45,6 +45,7 @@ public class Health : MonoBehaviour
         
             if(currentHealth > 0)
             {
+                AudioController.instance.PlaySound("Damage");
                 currentHealth -= damageAmount;
                 OnHealthChanged?.Invoke(currentHealth, maxHealth);
             }
@@ -65,6 +66,7 @@ public class Health : MonoBehaviour
     public void Dead()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        AudioController.instance.PlaySound("Death");
         gameObject.SetActive(false);
     }
 
