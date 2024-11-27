@@ -73,20 +73,22 @@ public class GameManager : MonoBehaviour
 
     void Win()
     {
+        AudioController.instance.PlaySound("Win");
         isGameOver = true; 
         isPaused = false; 
         Cursor.lockState = CursorLockMode.Confined; 
         Time.timeScale = 0f;
-        //UIController.instance.ShowWinScreen();
+        UIController.instance.ShowWinScreen();
     }
 
     void GameOver()
     {
+        AudioController.instance.PlaySound("GameOver");
         isGameOver = true; 
         isPaused = false; 
         Cursor.lockState = CursorLockMode.Confined; 
         Time.timeScale = 0f;
-        //UIController.instance.ShowGameOverScreen();
+        UIController.instance.ShowGameOverScreen();
     }
 
     public bool Unpause()

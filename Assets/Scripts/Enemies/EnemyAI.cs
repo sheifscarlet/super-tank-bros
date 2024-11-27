@@ -105,6 +105,7 @@ public class EnemyAI : MonoBehaviour
 
         if (!alreadyAttacked)
         {
+            AudioController.instance.PlaySound("Shoot");
             Rigidbody rb = Instantiate(projectile, turretObj.transform.position, Quaternion.identity).GetComponent<Rigidbody>();
             rb.AddForce(turretObj.transform.forward * missileSpeed, ForceMode.Impulse);
 
@@ -161,6 +162,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (currentHealth > 0)
         {
+            AudioController.instance.PlaySound("Damage");
             currentHealth -= damageAmount;
         }
         if (currentHealth <= 0)
@@ -176,6 +178,7 @@ public class EnemyAI : MonoBehaviour
 
     public void Dead()
     {
+        AudioController.instance.PlaySound("Death");
         gameObject.SetActive(false);
     }
 
