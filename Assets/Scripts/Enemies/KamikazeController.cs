@@ -71,6 +71,7 @@ public class KamikazeController : MonoBehaviour
     {
         if (other.collider.CompareTag("Player"))
         {
+            ParticleSystemController.Instance.PlayVFX("Dead",transform.position,Quaternion.identity);
             CameraShake.instance.ShakeCamera(10f, 0.25f);
             AudioController.instance.PlaySound("Explosion");
             AudioController.instance.PlaySound("Death");

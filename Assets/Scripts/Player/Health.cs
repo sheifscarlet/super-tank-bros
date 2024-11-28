@@ -17,6 +17,7 @@ public class Health : MonoBehaviour
 
     [SerializeField] bool canTakeDamage = true;
     private Coroutine shieldCoroutine;
+    [SerializeField] private GameObject shieldVFX;
     
     [Header("Camera Shake")] 
     [SerializeField] private float intensity = 5f;
@@ -27,6 +28,7 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        shieldVFX.SetActive(false);
         currentHealth = maxHealth;
         OnHealthChanged?.Invoke(currentHealth, maxHealth); 
     }
@@ -42,9 +44,10 @@ public class Health : MonoBehaviour
         if (canTakeDamage)
         {
             CameraShake.instance.ShakeCamera(intensity,time);
-        
+            
             if(currentHealth > 0)
             {
+                ParticleSystemController.Instance.PlayVFX("Hit",transform.position,Quaternion.identity);
                 AudioController.instance.PlaySound("Damage");
                 currentHealth -= damageAmount;
                 OnHealthChanged?.Invoke(currentHealth, maxHealth);
@@ -66,6 +69,7 @@ public class Health : MonoBehaviour
     public void Dead()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        ParticleSystemController.Instance.PlayVFX("Dead",transform.position,Quaternion.identity);
         AudioController.instance.PlaySound("Death");
         gameObject.SetActive(false);
     }
@@ -83,11 +87,12 @@ public class Health : MonoBehaviour
     private IEnumerator ShieldRoutine(float duration)
     {
         canTakeDamage = false; 
-        //add visual later
+        shieldVFX.SetActive(true);
 
         yield return new WaitForSeconds(duration); 
 
         canTakeDamage = true; 
+        shieldVFX.SetActive(false);
         shieldCoroutine = null; // Reset the coroutine reference
     }
     

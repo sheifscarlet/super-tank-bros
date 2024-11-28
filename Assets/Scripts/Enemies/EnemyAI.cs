@@ -162,6 +162,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (currentHealth > 0)
         {
+            ParticleSystemController.Instance.PlayVFX("Hit",transform.position,Quaternion.identity);
             AudioController.instance.PlaySound("Damage");
             currentHealth -= damageAmount;
         }
@@ -183,6 +184,7 @@ public class EnemyAI : MonoBehaviour
 
     public void Dead()
     {
+        ParticleSystemController.Instance.PlayVFX("Dead",transform.position,Quaternion.identity);
         AudioController.instance.PlaySound("Death");
         gameObject.SetActive(false);
     }
