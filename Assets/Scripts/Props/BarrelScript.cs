@@ -63,7 +63,7 @@ public class BarrelScript : MonoBehaviour
     {
         CameraShake.instance.ShakeCamera(intensity,time);
         AudioController.instance.PlaySound("Explosion");
-        
+        ParticleSystemController.Instance.PlayVFX("Barrel",transform.position,Quaternion.identity);
         // Get all colliders within the explosion radius
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
 

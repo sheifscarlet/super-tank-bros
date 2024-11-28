@@ -70,6 +70,7 @@ public class MissileScript : MonoBehaviour
     {
         if (other.CompareTag("Kamikaze"))
         {
+            ParticleSystemController.Instance.PlayVFX("Hit",transform.position,Quaternion.identity);
             CameraShake.instance.ShakeCamera(intensity, time);
             Destroy(other.gameObject);
             Score(100);
@@ -77,6 +78,7 @@ public class MissileScript : MonoBehaviour
         } 
         else if (other.CompareTag("Enemy"))
         {
+            
             CameraShake.instance.ShakeCamera(intensity, time);
             EnemyAI enemy = other.GetComponent<EnemyAI>();
             enemy.TakeDamage(damageAmount);
@@ -92,6 +94,7 @@ public class MissileScript : MonoBehaviour
         }
         else if (other.CompareTag("Environment"))
         {
+            ParticleSystemController.Instance.PlayVFX("Hit",transform.position,Quaternion.identity);
             CameraShake.instance.ShakeCamera(1.5f, time);
             DestroyMissile();
         }
