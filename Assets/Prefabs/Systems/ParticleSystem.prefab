@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2404370784511865410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8966177672981531371}
+  - component: {fileID: 7405804100264797999}
+  m_Layer: 0
+  m_Name: ParticleSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8966177672981531371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2404370784511865410}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7405804100264797999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2404370784511865410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b2271ed89b2474697fe59f5501af45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleEffects:
+  - effectName: Dead
+    particlePrefab: {fileID: 6573374800647813159, guid: b267ddfc039778f419e1c900ed159d41, type: 3}
+    poolSize: 5
+  - effectName: Hit
+    particlePrefab: {fileID: 6549927985450721434, guid: 8e2680025f848f3489cca26727498d8d, type: 3}
+    poolSize: 10
+  - effectName: Barrel
+    particlePrefab: {fileID: 6768037486012359070, guid: c178ba13fa1239e4692872bbc97242e3, type: 3}
+    poolSize: 10
+  - effectName: Shield
+    particlePrefab: {fileID: 4936962359590746958, guid: d5b1a47245d81024192874c180749d21, type: 3}
+    poolSize: 5
+  - effectName: Kamikaze
+    particlePrefab: {fileID: 4948858819960881474, guid: c086907b0e679d34c90f090255bff2bb, type: 3}
+    poolSize: 5

@@ -8,11 +8,14 @@ public class GameManager : MonoBehaviour
     
     [Header("Pause Settings")] 
     [SerializeField] private bool isPaused;
-    private bool isGameOver; 
-    
+    private bool isGameOver;
+
     [Header("Game Mode Settings")]
+    [SerializeField] private GameObject firstPlayer;
+    private Health firstPlayerHealth;
     [SerializeField] GameObject secondPlayerUI;
     [SerializeField] private GameObject secondPlayer;
+    private Health secondPlayerHealth;
     
     private void Awake()
     {
@@ -28,18 +31,25 @@ public class GameManager : MonoBehaviour
             Debug.Log("Two Player Mode Enabled");
             secondPlayerUI.SetActive(true);
             secondPlayer.SetActive(true);
+
+            firstPlayerHealth = firstPlayer.GetComponent<Health>();
+            secondPlayerHealth = secondPlayer.GetComponent<Health>();
         }
         else
         {
             Debug.Log("Single Player Mode Enabled");
             secondPlayerUI.SetActive(false);
             secondPlayer.SetActive(false);
+            
+            firstPlayerHealth = firstPlayer.GetComponent<Health>();
+            secondPlayerHealth = null;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        IsGameOverCheck();
         HandleInput();
         
         if (!isGameOver) 
@@ -58,9 +68,31 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (isGameOver)
+        {
+            GameOver();
+        }
+
         
     }
 
+    void IsGameOverCheck()
+    {
+        if (!GameSettings.IsTwoPlayerMode)
+        {
+            if (firstPlayerHealth.IsDead)
+            {
+                isGameOver = true;
+            }
+        }
+        else
+        {
+            if (firstPlayerHealth.IsDead && secondPlayerHealth.IsDead)
+            {
+                isGameOver = true;
+            }
+        }
+    }
     void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !isGameOver)

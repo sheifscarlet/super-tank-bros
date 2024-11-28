@@ -12,7 +12,7 @@ public class Health : MonoBehaviour
     [SerializeField] private int currentHealth;
     public int CurrentHealth => currentHealth;
     
-    private bool isDead = false;
+    [SerializeField] bool isDead = false;
     public bool IsDead => isDead;
 
     [SerializeField] bool canTakeDamage = true;
@@ -72,6 +72,7 @@ public class Health : MonoBehaviour
         ParticleSystemController.Instance.PlayVFX("Dead",transform.position,Quaternion.identity);
         AudioController.instance.PlaySound("Death");
         gameObject.SetActive(false);
+        isDead = true;
     }
 
     public void ActivateShield(float duration)
