@@ -73,6 +73,10 @@ public class GameManager : MonoBehaviour
             GameOver();
         }
 
+        if (EnemyWavesController.instance.allWavesCleared)
+        {
+            Win();
+        }
         
     }
 
