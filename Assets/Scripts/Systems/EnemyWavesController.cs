@@ -39,6 +39,8 @@ public class EnemyWavesController : MonoBehaviour
             {
                 // Activate the next wave
                 waves[currentWaveIndex].SetActive(true);
+                //spawn pick ups
+                PickupSpawner.instance.SpawnMaxPickups();
             }
         }
         
